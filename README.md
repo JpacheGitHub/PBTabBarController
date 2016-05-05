@@ -7,8 +7,6 @@
 
 ## 初始化方法
 
-两种初始化方法：
-
 ```bash
 - (instancetype)initWithType:(PBTabBarControllerType)type;
 ```
