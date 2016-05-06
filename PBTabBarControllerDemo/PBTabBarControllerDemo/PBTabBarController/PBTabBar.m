@@ -232,6 +232,10 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     
+    if (self.hidden == YES) {
+        return nil;
+    }
+    
     if (_tabBarControllerType == PBTabBarControllerCircleType) {
         
         if ([self isPointInsideTabBar:point]) {
