@@ -31,7 +31,14 @@
     if (![_badgeValue isEqualToString:badgeValue]) {
         _badgeValue = badgeValue;
     }
+    if (!badgeValue) {
+        self.badgeValueLable.text = nil;
+        self.badgeValueLable.hidden = YES;
+        return;
+    }
+    
     self.badgeValueLable.text = badgeValue;
+    self.badgeValueLable.hidden = NO;
     _badgeValueLable.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
 }
 

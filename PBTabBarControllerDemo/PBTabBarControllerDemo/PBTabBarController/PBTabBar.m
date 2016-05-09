@@ -187,14 +187,6 @@
         return;
     }
     
-    
-//    // 1.先将之前选中的按钮设置为未选中
-//    self.selectedBtn.selected = NO;
-//    // 2.再将当前按钮设置为选中
-//    sender.selected = YES;
-//    // 3.最后把当前按钮赋值为之前选中的按钮
-//    self.selectedBtn = sender;
-    
     if ([self.pb_delegate respondsToSelector:@selector(tabBarSpecialItem:selectedFrom:to:)]) {
         [self.pb_delegate tabBarSpecialItem:self selectedFrom:self.selectedBtn.tag - 1024 to:sender.tag - 1024];
     }

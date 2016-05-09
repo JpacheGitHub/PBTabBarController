@@ -73,10 +73,9 @@
 
 - (PBTabBar *)pb_tabBar {
     if (_pb_tabBar == nil) {
-        //测试添加自己的视图
+        
         _pb_tabBar = [[PBTabBar alloc] init];
         _pb_tabBar.pb_delegate = self; //设置代理
-        
         _pb_tabBar.translucent = NO;
     }
     return _pb_tabBar;
