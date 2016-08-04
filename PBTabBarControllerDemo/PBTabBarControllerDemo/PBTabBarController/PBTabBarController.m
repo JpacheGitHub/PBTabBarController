@@ -61,7 +61,7 @@
     _type = type;
     self.pb_tabBar.tabBarControllerType = _type;
     
-    _pb_tabBar.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 49, [UIScreen mainScreen].bounds.size.width, 49);
+    _pb_tabBar.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 49);
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
@@ -73,10 +73,11 @@
 
 - (PBTabBar *)pb_tabBar {
     if (_pb_tabBar == nil) {
-        
+        //测试添加自己的视图
         _pb_tabBar = [[PBTabBar alloc] init];
         _pb_tabBar.pb_delegate = self; //设置代理
-        _pb_tabBar.translucent = NO;
+        
+        _pb_tabBar.translucent = YES;
     }
     return _pb_tabBar;
 }
@@ -87,9 +88,9 @@
     self.selectedIndex = to;
 }
 
-- (void)tabBarSpecialItem:(PBTabBar *)tabBar selectedFrom:(NSInteger)from to:(NSInteger)to {
-    if (_pb_delegate && [_pb_delegate respondsToSelector:@selector(tabBarSelectedSpecialItem:)]) {
-        [_pb_delegate tabBarSelectedSpecialItem:tabBar];
+- (void)tabBarSpecialItem:(PBTabBar *)tabBar selectedFrom:(NSInteger)from to:(NSInteger)to sender:(PBTabBarButton *)sender{
+    if (_pb_delegate && [_pb_delegate respondsToSelector:@selector(tabBarSelectedSpecialItem:sender:)]) {
+        [_pb_delegate tabBarSelectedSpecialItem:tabBar sender:sender];
     }
 }
 

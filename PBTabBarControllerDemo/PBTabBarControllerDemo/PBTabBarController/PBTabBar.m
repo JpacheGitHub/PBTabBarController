@@ -187,8 +187,16 @@
         return;
     }
     
-    if ([self.pb_delegate respondsToSelector:@selector(tabBarSpecialItem:selectedFrom:to:)]) {
-        [self.pb_delegate tabBarSpecialItem:self selectedFrom:self.selectedBtn.tag - 1024 to:sender.tag - 1024];
+    
+//    // 1.先将之前选中的按钮设置为未选中
+//    self.selectedBtn.selected = NO;
+//    // 2.再将当前按钮设置为选中
+//    sender.selected = YES;
+//    // 3.最后把当前按钮赋值为之前选中的按钮
+//    self.selectedBtn = sender;
+    
+    if ([self.pb_delegate respondsToSelector:@selector(tabBarSpecialItem:selectedFrom:to:sender:)]) {
+        [self.pb_delegate tabBarSpecialItem:self selectedFrom:self.selectedBtn.tag - 1024 to:sender.tag - 1024 sender:sender];
     }
 }
 
@@ -241,14 +249,14 @@
 
 - (BOOL)isPointInsideTabBar:(CGPoint)point {
     
-    point.y = sqrt(point.y * point.y);
+    point.y = sqrt(point.y * point.y) + 49;
     
     CGFloat valueX = point.x - (self.bounds.size.width / 2);
     CGFloat valueY = point.y - (self.bounds.size.height / 2);
     
     CGFloat distance = sqrt((valueX * valueX) + (valueY * valueY));
     
-    if (distance < 35) {
+    if (distance + 22.5 < 58) {
         return YES;
     }else {
         return NO;
@@ -284,7 +292,7 @@
     
     CGFloat specialWidth = 0;
     if (_isTabBarCircleType) {
-        specialWidth = 70;
+        specialWidth = 58;
     }else {
         specialWidth = self.bounds.size.height - 2 * CUSTOM_BUTTON_PADDING;
     }
@@ -316,7 +324,7 @@
     
     CGFloat specialWidth = 0;
     if (_isTabBarCircleType) {
-        specialWidth = 70;
+        specialWidth = 58;
     }else {
         specialWidth = self.bounds.size.height - 2 * CUSTOM_BUTTON_PADDING;
     }

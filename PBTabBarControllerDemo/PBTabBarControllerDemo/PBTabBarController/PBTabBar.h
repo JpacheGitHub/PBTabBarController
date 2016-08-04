@@ -59,6 +59,7 @@
  */
 - (void)tabBarSpecialItem:(PBTabBar *)tabBar
              selectedFrom:(NSInteger)from
-                       to:(NSInteger)to;
+                       to:(NSInteger)to
+                   sender:(PBTabBarButton *)sender;
 
 @end

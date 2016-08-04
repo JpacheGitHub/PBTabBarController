@@ -39,7 +39,7 @@
     
     self.badgeValueLable.text = badgeValue;
     self.badgeValueLable.hidden = NO;
-    _badgeValueLable.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
+    self.badgeValueLable.center = CGPointMake(CGRectGetMaxX(self.imageView.frame), CGRectGetMinY(self.imageView.frame));
 }
 
 #pragma mark - getter

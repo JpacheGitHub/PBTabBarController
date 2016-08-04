@@ -25,7 +25,7 @@ typedef NS_ENUM (NSInteger, PBTabBarControllerType) {
 /**
  *  特殊功能键点击事件(特殊功能键未绑定 VC)
  */
-- (void)tabBarSelectedSpecialItem:(PBTabBar *)tabBar;
+- (void)tabBarSelectedSpecialItem:(PBTabBar *)tabBar sender:(PBTabBarButton *)sender;
 
 @end
 
