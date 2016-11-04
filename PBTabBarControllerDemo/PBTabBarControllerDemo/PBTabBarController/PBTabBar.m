@@ -11,25 +11,28 @@
 #import "PBTabBarItem.h"
 #import "PBMoreTabBarItemView.h"
 
-#define BUTTON_DEFAULT_TAG 1024
-#define CUSTOM_BUTTON_PADDING 5
+CGFloat const PBTabBarDefaultHeight = 49;
+CGFloat const PBTabBarCircleHeight = 58;
+static NSInteger const kPBTabBarButtonDefaultTag = 1024;
+static CGFloat const kPBTabBarCustomButtonPadding = 5;
+
 
 @interface PBTabBar ()<PBMoreTabBarItemViewDelegate>
 
-@property (nonatomic, strong) PBTabBarButton *selectedBtn;
 
+@property (nonatomic, strong) PBTabBarButton *selectedBtn;
 @property (nonatomic, strong) PBTabBarButton *circleBtn;
 
-@property (nonatomic, strong) NSMutableArray *tabBarButtons;
 
+@property (nonatomic, strong) NSMutableArray *tabBarButtons;
 @property (nonatomic, strong) NSMutableDictionary *tabBarTitles;
+
 
 @property (nonatomic, strong) PBMoreTabBarItemView *moreItemView;
 
+
 @property (nonatomic, assign) BOOL isHaveSpecialItem;
-
 @property (nonatomic, assign) BOOL isTabBarCircleType;
-
 @property (nonatomic, assign) BOOL isMoreBtnSelected;
 
 @end
@@ -106,7 +109,7 @@
     
     _selectedIndex = selectedIndex;
     
-    PBTabBarButton *button = [self viewWithTag:BUTTON_DEFAULT_TAG + selectedIndex];
+    PBTabBarButton *button = [self viewWithTag:kPBTabBarButtonDefaultTag + selectedIndex];
     // 1.先将之前选中的按钮设置为未选中
     self.selectedBtn.selected = NO;
     // 2.再将当前按钮设置为选中
@@ -232,7 +235,7 @@
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     
-    if (self.hidden == YES) {
+    if (self.hidden == YES || self.alpha == 0) {
         return nil;
     }
     
@@ -249,14 +252,12 @@
 
 - (BOOL)isPointInsideTabBar:(CGPoint)point {
     
-    point.y = sqrt(point.y * point.y) + 49;
-    
     CGFloat valueX = point.x - (self.bounds.size.width / 2);
-    CGFloat valueY = point.y - (self.bounds.size.height / 2);
+    CGFloat valueY = fabs(point.y - fabs(self.bounds.size.height - PBTabBarCircleHeight / 2));
     
     CGFloat distance = sqrt((valueX * valueX) + (valueY * valueY));
     
-    if (distance + 22.5 < 58) {
+    if (distance < PBTabBarCircleHeight / 2) {
         return YES;
     }else {
         return NO;
@@ -292,13 +293,13 @@
     
     CGFloat specialWidth = 0;
     if (_isTabBarCircleType) {
-        specialWidth = 58;
+        specialWidth = PBTabBarCircleHeight;
     }else {
-        specialWidth = self.bounds.size.height - 2 * CUSTOM_BUTTON_PADDING;
+        specialWidth = self.bounds.size.height - 2 * kPBTabBarCustomButtonPadding;
     }
     CGFloat boundsWidth = self.bounds.size.width - specialWidth;
     
-    btn.tag = BUTTON_DEFAULT_TAG + i;
+    btn.tag = kPBTabBarButtonDefaultTag + i;
     
     if (btn.tabBarItemType == PBTabBarItemCircleType || btn.tabBarItemType == PBTabBarItemSquareType) {
         
@@ -312,10 +313,10 @@
         
         PBTabBarItemType tempType = ((PBTabBarButton *)self.tabBarButtons[front]).tabBarItemType;
         if ((tempType == PBTabBarItemCircleType || tempType == PBTabBarItemSquareType) && front != 0) {
-            btn.tag = BUTTON_DEFAULT_TAG + front;
+            btn.tag = kPBTabBarButtonDefaultTag + front;
         }
         if (i == count - 1) {
-            btn.tag = BUTTON_DEFAULT_TAG + front;
+            btn.tag = kPBTabBarButtonDefaultTag + front;
         }
     }
 }
@@ -324,13 +325,13 @@
     
     CGFloat specialWidth = 0;
     if (_isTabBarCircleType) {
-        specialWidth = 58;
+        specialWidth = PBTabBarCircleHeight;
     }else {
-        specialWidth = self.bounds.size.height - 2 * CUSTOM_BUTTON_PADDING;
+        specialWidth = self.bounds.size.height - 2 * kPBTabBarCustomButtonPadding;
     }
     CGFloat boundsWidth = self.bounds.size.width - specialWidth;
     
-    btn.tag = BUTTON_DEFAULT_TAG + i;
+    btn.tag = kPBTabBarButtonDefaultTag + i;
     if (_tabBarControllerType == PBTabBarItemCircleType) {
         if (btn.tabBarItemType == PBTabBarItemCircleType || btn.tabBarItemType == PBTabBarItemSquareType) {
             
@@ -340,12 +341,12 @@
             [self getExceptSpecialItemFrameWithButton:btn index:i buttonCount:count boundsWidth:boundsWidth specialWidth:specialWidth type:btn.tabBarItemType];
         }
     }else {
-        btn.tag = BUTTON_DEFAULT_TAG + i;
+        btn.tag = kPBTabBarButtonDefaultTag + i;
         
         CGFloat x = i * self.bounds.size.width / count;
-        CGFloat y = self.bounds.size.height - 49;
+        CGFloat y = self.bounds.size.height - PBTabBarDefaultHeight;
         CGFloat width = self.bounds.size.width / count;
-        CGFloat height = 49;
+        CGFloat height = PBTabBarDefaultHeight;
         
         btn.frame = CGRectMake(x, y, width, height);
     }
@@ -356,7 +357,7 @@
     CGFloat x = i * boundsWidth / count;
     CGFloat y = self.bounds.size.height - specialWidth;
     if (type == PBTabBarItemSquareType) {
-        y = CUSTOM_BUTTON_PADDING;
+        y = kPBTabBarCustomButtonPadding;
     }
     CGFloat width = specialWidth;
     CGFloat height = specialWidth;
@@ -374,9 +375,9 @@
     
     
     CGFloat x = i == 0 ? 0 : CGRectGetMaxX(((PBTabBarButton *)self.tabBarButtons[front]).frame);
-    CGFloat y = self.bounds.size.height - 49;
+    CGFloat y = self.bounds.size.height - PBTabBarDefaultHeight;
     CGFloat width = boundsWidth / (count - 1);
-    CGFloat height = 49;
+    CGFloat height = PBTabBarDefaultHeight;
     
     PBTabBarItemType frontType = ((PBTabBarButton *)self.tabBarButtons[front]).tabBarItemType;
     if (front != 0 && (frontType == PBTabBarItemCircleType || frontType == PBTabBarItemSquareType)) {

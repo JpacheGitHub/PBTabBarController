@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "PBTabBarController.h"
 
+extern CGFloat const PBTabBarDefaultHeight;
+extern CGFloat const PBTabBarCircleHeight;
+
 @class PBTabBarItem;
 @protocol PBTabBarDelegate;
 
