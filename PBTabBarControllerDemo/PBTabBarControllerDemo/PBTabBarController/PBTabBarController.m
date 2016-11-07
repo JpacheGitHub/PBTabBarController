@@ -60,6 +60,7 @@
 - (void)setType:(PBTabBarControllerType)type {
     _type = type;
     self.pb_tabBar.tabBarControllerType = _type;
+//    _pb_tabBar.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, PBTabBarDefaultHeight);
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {

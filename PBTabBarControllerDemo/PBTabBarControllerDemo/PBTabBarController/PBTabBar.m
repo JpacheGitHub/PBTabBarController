@@ -214,7 +214,6 @@ static CGFloat const kPBTabBarCustomButtonPadding = 5;
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    self.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height - PBTabBarDefaultHeight, [UIScreen mainScreen].bounds.size.width, PBTabBarDefaultHeight);
     
     for (UIView *tabBarButton in self.subviews) {
         if ([tabBarButton isKindOfClass:NSClassFromString(@"UITabBarButton")]) {
