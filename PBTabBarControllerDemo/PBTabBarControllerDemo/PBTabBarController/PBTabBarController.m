@@ -60,13 +60,15 @@
 - (void)setType:(PBTabBarControllerType)type {
     _type = type;
     self.pb_tabBar.tabBarControllerType = _type;
-    
-    _pb_tabBar.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 49);
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
     [super setSelectedIndex:selectedIndex];
     self.pb_tabBar.selectedIndex = selectedIndex;
+    
+    if (_pb_delegate && [_pb_delegate respondsToSelector:@selector(tabBarSelectedDefaultItem:sender:)]) {
+        [_pb_delegate tabBarSelectedDefaultItem:_pb_tabBar sender:(PBTabBarButton *)[_pb_tabBar viewWithTag:PBTabBarButtonDefaultTag + selectedIndex]];
+    }
 }
 
 #pragma mark - getter

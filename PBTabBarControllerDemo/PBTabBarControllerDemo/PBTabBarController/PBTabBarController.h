@@ -23,6 +23,11 @@ typedef NS_ENUM (NSInteger, PBTabBarControllerType) {
 @optional
 
 /**
+ *  普通按键键点击事件
+ */
+- (void)tabBarSelectedDefaultItem:(PBTabBar *)tabbar sender:(PBTabBarButton *)sender;
+
+/**
  *  特殊功能键点击事件(特殊功能键未绑定 VC)
  */
 - (void)tabBarSelectedSpecialItem:(PBTabBar *)tabBar sender:(PBTabBarButton *)sender;

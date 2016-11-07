@@ -11,6 +11,7 @@
 
 extern CGFloat const PBTabBarDefaultHeight;
 extern CGFloat const PBTabBarCircleHeight;
+extern NSInteger const PBTabBarButtonDefaultTag;
 
 @class PBTabBarItem;
 @protocol PBTabBarDelegate;
