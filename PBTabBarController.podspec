@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-                         Supports TabBarController to add custom button, written by Objective-C.
+                         Supports TabBarController to add custom button. Written by Objective-C.
                    DESC
 
   s.homepage     = "https://github.com/JpacheGitHub/PBTabBarController"
