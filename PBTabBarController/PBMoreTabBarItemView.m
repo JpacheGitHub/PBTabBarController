@@ -12,15 +12,15 @@
 #define BUTTON_WIDTH 44
 #define BUTTON_PADDING 10
 
-@interface PBMoreTabBarItemView ()
-
-@end
-
-@implementation PBMoreTabBarItemView {
+@interface PBMoreTabBarItemView () {
     NSInteger _column;
     NSInteger _line;
     NSInteger _defaultTag;
 }
+
+@end
+
+@implementation PBMoreTabBarItemView
 
 - (instancetype)init {
     self = [super init];
