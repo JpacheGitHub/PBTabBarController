@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "PBTabBarController"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "Supports TabBarController to add custom button"
 
   # This description is used to generate tags and improve search results.
@@ -55,7 +55,7 @@ Pod::Spec.new do |s|
 
   s.author             = { "Jpache" => "jingpengbomail@gmail.com" }
   # Or just: s.author    = "Jpache"
-  s.authors            = { "Jpache" => "jingpengbomail@gmail.com" }
+  # s.authors            = { "Jpache" => "jingpengbomail@gmail.com" }
   s.social_media_url   = "http://www.jpache.com"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
